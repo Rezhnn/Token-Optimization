@@ -1,29 +1,33 @@
 # Cursor Agent Rules
-# Zone-Based Execution Model — https://github.com/Rezhnn/Token-Optimization
+
+Zone-Based Execution is active.
+
+Full spec: HYBRID_RUNTIME_SPEC.md
+
+## FinOps Boundary
+
+Use `.cursorignore` as the Cursor boundary. Keep it aligned with `.geminiignore`, `.claudeignore`, `.codexignore`, and `.openaiignore`.
 
 ## Active Zones
 
-1. **ZONE 0 — SACRED** *(Highest Priority)*
-   - Scope: Any file write to source code (`src/**`, `*.ts`, `*.tsx`, `*.js`, `*.py`, `*.go`, `*.rs`, comments, docstrings)
-   - Rule: Full SOLID, KISS, DRY, Clean Code. Absolutely NO compressed grammar. No abbreviations. No shortcuts.
+1. ZONE 0 - SACRED
+   - Scope: code/docs writes, comments, docstrings.
+   - Rule: full clean-code prose, no compressed grammar.
 
-2. **ZONE 1 — PREMIUM**
-   - Triggers: `[PLAN]`, `[ARCH]`, `[DESIGN]`, `[PRD]`, `[BRIEF]`, `[REVIEW]`, `!verbose`, `!code`
-   - Implicit: "architecture", "design system", "storyboard", "user flow", "diagram"
-   - Rule: Full verbose. Mermaid diagrams. No truncation. Complete storyboards.
+2. ZONE 1 - PREMIUM
+   - Triggers: `[PLAN]`, `[ARCH]`, `[DESIGN]`, `[PRD]`, `[BRIEF]`, `[REVIEW]`, `!verbose`, `!code`.
+   - Rule: full depth, diagrams when useful.
 
-3. **ZONE 2 — HYBRID** *(Default)*
-   - Scope: Debug, explanations, comparisons, general Q&A
-   - Rule: Compress internal reasoning. Output is always well-structured standard prose.
+3. ZONE 2 - HYBRID
+   - Scope: default Q&A, debugging, explanations, comparisons.
+   - Rule: concise internal analysis, clear final output.
 
-4. **ZONE 3 — CAVEMAN**
-   - Triggers: `[CMD]`, `[GIT]`, `[PKG]`, `[QUICK]`, `$`, `!fast`
-   - Implicit: install/run/git/delete commands, package ops
-   - Rule: Ultra-terse. No preamble. Raw, functional output only.
+4. ZONE 3 - CAVEMAN
+   - Triggers: `[CMD]`, `[GIT]`, `[PKG]`, `[QUICK]`, `$`, `!fast`.
+   - Rule: terse operational output.
 
 ## Conflict Resolution
-- Zone 0 > Zone 1 > Zone 2 > Zone 3
-- Zone 3 + file write = Zone 0 wins
-- Caveman grammar NEVER touches code, comments, READMEs, or client docs
 
-## Full Spec → [HYBRID_RUNTIME_SPEC.md](HYBRID_RUNTIME_SPEC.md)
+- Zone 0 > Zone 1 > Zone 2 > Zone 3.
+- Zone 3 + code/docs write = Zone 0 wins.
+- Caveman grammar never touches code, comments, docstrings, READMEs, CHANGELOGs, ADRs, client-facing docs, or production error messages.

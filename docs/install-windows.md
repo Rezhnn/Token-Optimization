@@ -1,54 +1,70 @@
-# Windows Installation Guide — FinOps Token Optimization
+# Windows Installation Guide - FinOps Token Optimization
 
-Installing the Zone-Based Execution Model on Windows can be done with a single PowerShell command. This guide outlines how to handle execution policies, configure environment parameters, and manually set up system paths if needed.
+Installing the Zone-Based Execution Model on Windows writes workspace instruction files and aligned ignore boundaries into the current project root.
+
+It does not install a global service. It becomes usable when Antigravity, Codex, Cursor, or Claude Code reads the workspace files.
 
 ---
 
-## 🚀 One-Line PowerShell Installation
+## One-Line PowerShell Installation
 
-Open your PowerShell terminal (run as Administrator if needed to modify execution policies), navigate to your project root, and execute:
+Open PowerShell, move to your project root, and run:
 
 ```powershell
 irm https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/install.ps1 | iex
 ```
 
-### 🛑 Troubleshooting "Execution Policy" Errors
-If PowerShell displays an error regarding execution policies (e.g., `Scripts are disabled on this system`), you can temporarily bypass this constraint for the current session:
+## Execution Policy Troubleshooting
+
+If PowerShell reports that scripts are disabled, temporarily bypass the policy for the current session:
 
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
 irm https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/install.ps1 | iex
 ```
 
-Or run the script with a bypass argument:
+Or run the command with a bypass argument:
+
 ```powershell
 powershell -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/install.ps1 | iex"
 ```
 
 ---
 
-## 🛠️ Manual Installation on Windows
+## Manual Installation on Windows
 
-If your corporate environment or firewall blocks direct script downloads:
+If direct script downloads are blocked:
 
-1. **Download the Repository:** Clone the repository locally:
+1. Clone the repository:
+
    ```cmd
    git clone https://github.com/Rezhnn/Token-Optimization.git
    ```
-2. **Copy the Configuration Files:** Copy all the `.ignore` files and core markdown guides from the cloned repository into your active project's root folder:
+
+2. Copy these guide files into your active project's root folder:
+
    - `HYBRID_RUNTIME_SPEC.md`
    - `AGENTS.md`
    - `CLAUDE.md`
    - `GEMINI.md`
    - `.cursorrules`
-   - `.geminiignore` / `.cursorignore` / `.claudeignore` / `.codexignore` / `.openaiignore`
+
+3. Copy the shared ignore template into all five boundary files:
+
+   - `.geminiignore`
+   - `.cursorignore`
+   - `.claudeignore`
+   - `.codexignore`
+   - `.openaiignore`
 
 ---
 
-## 🔍 Verification
+## Verification
 
-Validate that everything is configured properly by initiating an agent request:
+In the configured workspace, ask:
+
 ```powershell
-[CMD] Echo "Active"
+[CMD] echo Active
 ```
-*Expected output: The agent should run the command and output in a minimal format (Zone 3).*
+
+Expected behavior: the agent response should be terse and operational.

@@ -1,10 +1,8 @@
 # ==============================================================================
-# .geminiignore / .cursorignore / .claudeignore / .codexignore / .openaiignore
-# FinOps Token Optimization — Universal AI Boundary File
-# Version: 2.0.0 | https://github.com/Rezhnn/Token-Optimization
+# .geminiignore - EXTREME FINOPS & CONTEXT OPTIMIZATION
 # ==============================================================================
 
-# 1. DEPENDENCY TREES & LOCK FILES
+# 1. DEPENDENCY TREES & LOCK FILES (MASSIVE TOKEN DRAINS)
 node_modules/
 vendor/
 packages/*/node_modules/
@@ -28,20 +26,12 @@ $RECYCLE.BIN/
 .vscode/*
 !.vscode/settings.json
 !.vscode/launch.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln.docstates
 
-# 3. PYTHON VIRTUAL ENVIRONMENTS & PACKAGE ARTIFACTS
-.venv/
-venv/
-env/
-ENV/
-.env/
-site-packages/
-pip-wheel-metadata/
-.eggs/
-*.egg-info/
-*.pyd
-
-# 4. BUILD ARTIFACTS & COMPILED CODE
+# 3. BUILD ARTIFACTS & COMPILED CODE
 dist/
 build/
 out/
@@ -64,7 +54,7 @@ __pycache__/
 *.a
 *.lib
 
-# 5. CACHES, METADATA & COVERAGE
+# 4. CACHES, METADATA & COVERAGE
 .cache/
 .vite/
 .turbo/
@@ -79,9 +69,10 @@ coverage/
 .nyc_output/
 .tox/
 
-# 6. DATABASES & LOGS
+# 5. DATABASES & LOGS
 *.log
 *.sqlite
+*.sqlite*
 *.sqlite3
 *.db
 *.sql
@@ -90,9 +81,9 @@ coverage/
 *.mongo
 *.rdb
 storage/logs/
-logs/
 
-# 7. BINARY, MULTIMEDIA & HEAVY ASSETS
+# 6. BINARY, MULTIMEDIA & HEAVY ASSETS
+# (Prevents expensive multimodal/vision token usage unless requested)
 *.png
 *.jpg
 *.jpeg
@@ -115,12 +106,21 @@ logs/
 *.ttf
 *.eot
 
-# 8. MINIFIED & COMPILED WEB ASSETS
+# 7. MINIFIED & COMPILED WEB ASSETS
 *.min.js
 *.min.css
 *.chunk.js
 *.bundle.js
 *.map
 
-# 9. TEST SNAPSHOTS
-**/__snapshots__/
+# 8. PYTHON VIRTUAL ENVIRONMENTS & PACKAGE ARTIFACTS
+.venv/
+venv/
+env/
+ENV/
+.env/
+site-packages/
+pip-wheel-metadata/
+.eggs/
+*.egg-info/
+*.pyd

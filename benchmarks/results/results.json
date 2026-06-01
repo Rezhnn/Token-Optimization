@@ -1,6 +1,7 @@
 {
-  "last_run": "2026-06-01",
-  "average_savings": "26.8%",
-  "operational_savings": "84.5%",
-  "notes": "Evaluation verified on Antigravity and Claude Code sessions."
+  "status": "placeholder",
+  "last_run": null,
+  "average_savings": null,
+  "operational_savings": null,
+  "notes": "No automated benchmark runner is included yet. Do not cite this file as measured savings until a runner regenerates it."
 }

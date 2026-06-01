@@ -1,143 +1,152 @@
 # HYBRID_RUNTIME_SPEC.md
-## Antigravity × Caveman Ecosystem — Zone-Based Execution Model v2.0
 
-> **One rule above all:** Zone number wins. Lower zone = higher sacred priority.
-> When in doubt, default to Zone 2 (Hybrid).
+## Hybrid Runtime Spec - Zone-Based Execution Model v2.1
 
----
+This repository mirrors the maintainer's installed global setup for Antigravity, Codex, Cursor, and Claude Code.
 
-## 1. Zone Architecture
+The model is instruction-based. It guides agent behavior through workspace files and ignore boundaries; it does not provide runtime enforcement, middleware, a proxy, or token counting by itself.
 
-The system operates on **4 execution zones**. The agent determines the zone from explicit triggers first, then implicit context.
-
-```
-ZONE 0 — SACRED         (code files, comments, docstrings)           Highest Priority
-ZONE 1 — PREMIUM        (architecture, UI/UX, planning, client docs)
-ZONE 2 — HYBRID         (reviews, debug, internal analysis)          ← DEFAULT
-ZONE 3 — CAVEMAN        (terminal, git, package ops, quick queries)   Lowest Priority
-```
+When in doubt, default to Zone 2 (Hybrid).
 
 ---
 
-## 2. Zone Rules
+## 1. FinOps Auto-Initialization
 
-### ZONE 0 — SACRED
-**Rule:** Caveman grammar is COMPLETELY BANNED. No compression. No shortcuts. Full SOLID, KISS, DRY, Clean Code at all times.
+Upon entering any workspace, apply the `geminiignore-finops` behavioral rules before reading project files:
 
-**Applies to any file write targeting:**
+- use need-to-know reading,
+- prefer targeted search over broad dumps,
+- never read lockfiles or large minified bundles unless explicitly required,
+- keep edits surgical,
+- keep `.geminiignore`, `.cursorignore`, `.claudeignore`, `.codexignore`, and `.openaiignore` aligned.
+
+If the workspace lacks the ignore files, create them from `skills/finops-zones/templates/ignore.template`.
+
+---
+
+## 2. Zone Architecture
+
+```text
+ZONE 0 - SACRED    -> code files, comments, docstrings
+ZONE 1 - PREMIUM   -> architecture, UI/UX, planning, client docs
+ZONE 2 - HYBRID    -> reviews, debug, Q&A (DEFAULT)
+ZONE 3 - CAVEMAN   -> terminal, git, package ops, quick queries
 ```
+
+Priority:
+
+```text
+Zone 0 > Zone 1 > Zone 2 > Zone 3
+```
+
+---
+
+## 3. Zone Rules
+
+### Zone 0 - Sacred
+
+Triggered by any file write to:
+
+```text
 src/**, lib/**, components/**, pages/**, utils/**, hooks/**
 *.ts, *.tsx, *.js, *.jsx, *.py, *.go, *.rs
-README.md, CHANGELOG.md, ADR-*.md, /docs/**
-JSDoc, TSDoc, inline code comments
+README.md, CHANGELOG.md, ADR-*.md, docs/**
+inline comments, docstrings, JSDoc, TSDoc
 ```
+
+Rules:
+
+- Caveman grammar is banned.
+- Use full standard programming prose.
+- Prioritize correctness, maintainability, SOLID, KISS, DRY, and Clean Code.
+
+### Zone 1 - Premium
+
+Explicit triggers:
+
+```text
+[PLAN], [ARCH], [DESIGN], [PRD], [BRIEF], [REVIEW], !verbose, !code
+```
+
+Implicit triggers:
+
+```text
+architecture, design system, storyboard, user flow, diagram, multi-phase planning
+```
+
+Rules:
+
+- Use full-depth structured output.
+- Use Mermaid diagrams when they improve clarity.
+- Do not truncate important planning or architecture details.
+
+### Zone 2 - Hybrid
+
+Default for debugging, explanations, comparisons, reviews, and general Q&A.
+
+Rules:
+
+- Compress internal analysis.
+- Keep final user-facing output clear, professional, and complete enough to act on.
+- Avoid padding, repeated context, and unnecessary preambles.
+
+### Zone 3 - Caveman
+
+Explicit triggers:
+
+```text
+[CMD], [GIT], [PKG], [QUICK], $, !fast
+```
+
+Implicit triggers:
+
+```text
+install, run, delete, git, package operations, terminal-only tasks
+```
+
+Rules:
+
+- Keep output terse and operational.
+- Avoid greetings, long explanations, and conclusions.
+- If the task writes code or docs, Zone 0 wins.
 
 ---
 
-### ZONE 1 — PREMIUM
-**Trigger keywords (prefix your message):**
-```
-[PLAN]    → storyboard, user flows, feature planning
-[ARCH]    → system architecture, service diagrams, ADRs
-[DESIGN]  → UI/UX specs, design system, component anatomy
-[PRD]     → product requirements, acceptance criteria
-[BRIEF]   → client-facing documents, proposals, reports
-[REVIEW]  → thorough code review
-```
+## 4. Anti-Corruption Rules
 
-**Also auto-triggers on:** "architecture", "design system", "user flow", "storyboard", "diagram"
+- Caveman grammar never touches code files, comments, docstrings, READMEs, CHANGELOGs, ADRs, client-facing docs, or production error messages.
+- Full verbose output should not trigger for terminal summaries, git log/diff, package audits, or quick confirmations.
+- If a Zone 3 request requires writing a code file, Zone 0 wins automatically.
 
 ---
 
-### ZONE 2 — HYBRID (Default)
-**Rule:** "Think cheap, output proper." Internal reasoning may be compressed. Final output uses standard quality.
+## 5. Workflow Decision Tree
 
-**Applies to:** debug analysis, code explanations, technical comparisons, general Q&A.
-
----
-
-### ZONE 3 — CAVEMAN
-**Trigger keywords:**
-```
-[CMD]    → terminal commands
-[GIT]    → git operations
-[PKG]    → package installs
-[QUICK]  → fast one-liners
-$        → any message starting with $
-```
-
-**Also auto-triggers on:** Single-verb commands, obvious terminal operations.
-
----
-
-## 3. Explicit Override Commands
-
-```
-!verbose    → Force Zone 1 for the current response only
-!code       → Force Zone 0 output quality
-!fast       → Force Zone 3 for the current response only
-!memory     → Surface relevant context to user
-```
-
----
-
-## 4. Anti-Corruption Rules (Non-Negotiable)
-
-**Caveman grammar NEVER touches:**
-- Code files (any extension)
-- Code comments or docstrings
-- Client-facing documents
-- Architecture Decision Records
-- README or CHANGELOG files
-- Error messages or log strings in production code
-
-**Full verbose NEVER triggers for:**
-- Terminal command output summaries
-- Git log/diff analysis
-- Quick "yes/no" confirmations
-
-**Conflict resolution:**
-```
-Zone 0 > Zone 1 > Zone 2 > Zone 3
-
-Zone 3 request + code file write → Zone 0 wins.
-Zone 1 request + quick status check → Zone 3 wins.
-Ambiguous → Zone 2, ask inline.
-```
-
----
-
-## 5. FinOps Token Budget by Zone
-
-```
-Zone 0 — SACRED   → Unconstrained. Correctness first.
-Zone 1 — PREMIUM  → High. Full depth.
-Zone 2 — HYBRID   → Medium. Compress reasoning, not output.
-Zone 3 — CAVEMAN  → Minimal. 70-80% reduction target.
-```
-
----
-
-## 6. Workflow Decision Tree
-
-```
+```text
 User message received
-        │
-        ▼
-Does it match Zone 0? (write to src/*, *.py, *.ts, *.go...)
-        │ YES → Zone 0. SOLID + Clean Code. No caveman.
-        │ NO ↓
-Does it have explicit keyword? ([PLAN], [CMD], [GIT]...)
-        │ YES → Route to that zone.
-        │ NO ↓
+  |
+  v
+Does it write code, comments, docstrings, or production docs?
+  | yes -> Zone 0
+  | no
+  v
+Does it have an explicit zone keyword or override?
+  | yes -> route to that zone, unless a higher-priority zone applies
+  | no
+  v
 Implicit context check:
-  architecture/diagram/storyboard  → Zone 1
-  install/git/terminal verbs       → Zone 3
-  everything else                  → Zone 2 (default)
-        │ ↓
-Apply zone rules and respond.
+  architecture / design / storyboard -> Zone 1
+  terminal / git / package task      -> Zone 3
+  everything else                    -> Zone 2
 ```
 
 ---
 
-*Spec v2.0 — Designed for: Antigravity × Caveman × Claude Code / Cursor / Codex*
+## 6. Verification
+
+The expected verification is behavioral:
+
+1. `[GIT] status` should produce terse operational output.
+2. A normal explanation prompt should produce concise but clear prose.
+3. `[ARCH] design ...` should produce structured planning output.
+4. Any code/doc write should use full-quality prose and maintainability rules.

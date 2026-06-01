@@ -1,76 +1,69 @@
-# FinOps Token Optimization — Installation Guide
+# FinOps Token Optimization - Installation Guide
 
-This document provides a comprehensive installation guide for the **Zone-Based Execution Model** across various operating systems and development environments.
+This guide installs the instruction files and aligned ignore boundaries used by the Zone-Based Execution Model.
 
-The install scripts write the workspace guide files and aligned ignore boundaries directly into the target project root. After the files land, the four primary tools named in the README can use the skill immediately in that workspace, provided they honor workspace instructions.
+The install scripts write files into the target project root. After the files land, Antigravity, Codex, Cursor, and Claude Code can use the rules in that workspace if they honor their workspace instruction files.
+
+This is not a global installer, runtime hook, proxy, token counter, or benchmark runner.
 
 ---
 
-## ⚡ Quick One-Line Installation
+## Quick One-Line Installation
 
-Select the appropriate command for your platform and execute it within your project's root directory:
+Run the appropriate command in your project root.
 
 ### macOS, Linux, or WSL (Bash)
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/install.sh | bash
 ```
 
 ### Windows (PowerShell)
+
 ```powershell
 irm https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/install.ps1 | iex
 ```
 
 ---
 
-## 🛠️ Step-by-Step Manual Installation
-
-If you prefer to install the components manually or want to selectively apply the rules:
+## Manual Installation
 
 ### Step 1: Initialize Workspace Boundaries
-Create the following boundary files in the root of your project:
+
+Create these files in the project root:
+
 - `.geminiignore`
 - `.cursorignore`
 - `.claudeignore`
 - `.codexignore`
 - `.openaiignore`
 
-Copy the contents of the official [ignore.template](skills/finops-zones/templates/ignore.template) into each of these files. These boundaries exclude lockfiles, build folders, minified bundles, and heavy media assets from being ingested by your coding agents, which reduces context bloat in practice.
+Copy the contents of [ignore.template](skills/finops-zones/templates/ignore.template) into each file. The automatic scripts do this for you.
 
-The automatic scripts do this part for you, so manual setup is only needed if you want to install the files yourself or keep the repo contents under explicit control.
+### Step 2: Add Workspace Guides
 
-### Step 2: Establish Agent System Guidelines
-Download or create the following workspace guides to ensure your developer agents enforce zone rules:
+Copy these guide files into the project root:
 
-- **[HYBRID_RUNTIME_SPEC.md](HYBRID_RUNTIME_SPEC.md)**: The core standard document establishing rules, keywords, and anti-corruption policies.
-- **[AGENTS.md](AGENTS.md)**: The master agent protocol.
-- **[CLAUDE.md](CLAUDE.md)**: Enforces zone routing policies for Claude Code.
-- **[GEMINI.md](GEMINI.md)**: Enforces zone routing policies for Antigravity.
-- **[.cursorrules](.cursorrules)**: Enforces zone routing policies for Cursor IDE.
+- [HYBRID_RUNTIME_SPEC.md](HYBRID_RUNTIME_SPEC.md)
+- [AGENTS.md](AGENTS.md)
+- [CLAUDE.md](CLAUDE.md)
+- [GEMINI.md](GEMINI.md)
+- [.cursorrules](.cursorrules)
 
----
-
-## 🔍 Verification
-
-To verify that your installation has succeeded, run a few simple checks in your terminal with your agent:
-
-1. **Verify Zone 3 (Caveman):**
-   ```bash
-   [GIT] status
-   ```
-   *Expected: The response should be extremely terse (1-3 lines).*
-
-2. **Verify Zone 2 (Hybrid):**
-   Ask the agent a general question:
-   > "Explain what the open-closed principle means in SOLID."
-   *Expected: A clear, concise, professional explanation without unnecessary preambles.*
-
-3. **Verify Zone 1 (Premium):**
-   ```bash
-   [PLAN] Design a multi-tenant user authentication workflow
-   ```
-   *Expected: Full detailed storyboard structure including user actions, database states, and visual changes.*
+These files guide supported agents; they do not enforce behavior outside the agent's normal instruction-following mechanism.
 
 ---
 
-## 📖 Detailed Guides
-- Windows users: See the detailed [Windows Installation Guide](docs/install-windows.md) for execution policies and environment configuration.
+## Verification
+
+1. Confirm all five ignore files exist and have identical content.
+2. Confirm `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, and `.cursorrules` exist.
+3. Ask `[GIT] status`; expected response is terse.
+4. Ask a general explanation question; expected response is concise but clear.
+5. Ask `[PLAN] Design a multi-tenant user authentication workflow`; expected response is detailed and structured.
+
+---
+
+## Detailed Guides
+
+- Windows users: see [docs/install-windows.md](docs/install-windows.md).

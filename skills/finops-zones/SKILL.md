@@ -1,163 +1,102 @@
 ---
-name: finops-zones
-version: 2.0.0
-description: "Zone-Based Execution Model for AI agents — cuts 60-90% of API token usage by dynamically routing tasks to the right verbosity level. Sacred code quality is NEVER sacrificed."
-category: token-optimization
+name: geminiignore-finops
+version: 2.1.0
+description: "Instruction-based FinOps boundaries and hybrid zone routing for Antigravity, Codex, Cursor, and Claude Code."
+category: context-optimization
 risk: safe
 source: https://github.com/Rezhnn/Token-Optimization
 author: Rezhnn
 contributors:
   - JuliusBrussee (base caveman grammar concept)
-  - Anthropic / OpenAI (verbosity constraint research)
 tags:
   - finops
+  - context-management
   - token-optimization
   - zone-routing
-  - context-management
-  - cost-reduction
   - antigravity
   - claude-code
   - cursor
   - codex
 tools:
   - antigravity
+  - gemini
   - claude-code
   - cursor
   - codex
-  - windsurf
-  - roo-code
-  - cline
-  - aider
 ---
 
-# FinOps Zone-Based Execution Model
+# GeminiIgnore FinOps and Hybrid Runtime Rules
 
 ## What This Skill Does
 
-This skill installs a **4-zone dynamic routing system** into your AI coding agent. Instead of the agent responding with the same verbosity level for *every* type of request, it intelligently shifts its behaviour based on what kind of task is being performed.
+This skill mirrors the maintainer's installed global setup. It gives supported agents two instruction layers:
 
-The result is a **60–90% reduction in API token usage** for operational tasks (git, installs, terminal ops) while maintaining **100% full quality** for architecture, planning, and production code.
+1. A shared ignore boundary for `.geminiignore`, `.cursorignore`, `.claudeignore`, `.codexignore`, and `.openaiignore`.
+2. A four-zone routing model for output discipline.
 
----
+This is an instruction-based setup. It does not provide runtime enforcement, token counting, or a benchmark runner by itself. The rules are effective when the active tool reads and follows the workspace instruction files.
 
-## The Four Zones
+## FinOps Behavioral Rules
 
-### 🟢 ZONE 0 — SACRED
-**"Correctness is the only currency."**
+1. Never read lockfiles or large minified bundles unless explicitly required.
+2. Prefer exact paths, manifests, and targeted search over broad tree-wide reads.
+3. Keep edits surgical and avoid rewriting whole files for small changes.
+4. Keep all AI ignore files aligned when creating or updating them.
 
-- **Triggered by:** Any file write to source code (`*.py`, `*.ts`, `*.js`, `*.rs`, `*.go`, `src/**`, `lib/**`, etc.) or documentation (`README.md`, `CHANGELOG.md`, `ADR-*.md`, docstrings, inline comments).
-- **Output style:** Full standard programming prose. SOLID, KISS, DRY, Clean Code enforced at all times. Zero abbreviations, zero compression. Every comment is a complete sentence. Every function is named with intent.
-- **Token budget:** Unconstrained. Correctness is the only metric.
-- **Anti-corruption:** If a Zone 3 request (e.g. `[CMD]`) triggers a file write, **Zone 0 wins immediately.**
+## Universal Ignore Files
 
----
+The installer writes the same template to:
 
-### 🔵 ZONE 1 — PREMIUM
-**"Full depth, full vision, full output."**
+- `.geminiignore`
+- `.cursorignore`
+- `.claudeignore`
+- `.codexignore`
+- `.openaiignore`
 
-- **Triggered by explicit keywords:** `[PLAN]`, `[ARCH]`, `[DESIGN]`, `[PRD]`, `[BRIEF]`, `[REVIEW]`
-- **Triggered by implicit context:** Messages containing "architecture", "design system", "storyboard", "user flow", "diagram", or multi-phase planning discussions.
-- **Triggered by overrides:** `!verbose`, `!code`
-- **Output style:** Full verbose markdown with Mermaid diagrams, structured hierarchy, complete storyboards (What user does → How they enter → Fill-in → Button → After → Landing → Guidance → DB state → Visual changes). No truncation ever.
-- **Token budget:** High. Depth and completeness are the metrics.
+The canonical template is [templates/ignore.template](templates/ignore.template).
 
----
+## Zone-Based Execution Model
 
-### 🟡 ZONE 2 — HYBRID *(Default)*
-**"Think cheap, output proper."**
-
-- **Triggered by:** Anything that doesn't match Zone 0, 1, or 3. This is the default state.
-- **Output style:** The agent's *internal reasoning* may be compressed and terse (chain-of-thought, intermediate analysis), but the *final output to the user* is always well-structured, polite, professional prose.
-- **Applies to:** Debug analysis ("why is this broken?"), code explanations ("what does this function do?"), technical comparisons ("Redis vs Memcached?"), general Q&A.
-- **Token budget:** Medium. Compress reasoning, not answers.
-
----
-
-### 🔴 ZONE 3 — CAVEMAN
-**"Few words. Maximum function. Go."**
-
-- **Triggered by explicit keywords:** `[CMD]`, `[GIT]`, `[PKG]`, `[QUICK]`, `$` (any message starting with `$`)
-- **Triggered by explicit overrides:** `!fast`
-- **Triggered by implicit context:** Single-verb commands ("install X", "run Y", "delete Z"), obvious terminal operations, git ops, package installs.
-- **Output style:** Ultra-terse, compressed "caveman grammar." Preambles are stripped. Output is raw, functional, and minimal.
-- **Token budget:** Minimal. Target 70–80% compression vs Zone 2 baseline.
-- **Anti-corruption:** Caveman grammar NEVER leaks into code files, comments, READMEs, or any client-facing output.
-
----
-
-## Zone Conflict Resolution
-
-```
-Priority: ZONE 0 > ZONE 1 > ZONE 2 > ZONE 3
-
-Rule 1: Zone 3 request + file write = Zone 0 wins.
-Rule 2: Zone 1 request + quick status check = Zone 3 wins.
-Rule 3: Genuinely ambiguous = Zone 2, ask inline for clarification.
+```text
+ZONE 0 - SACRED    -> code files, comments, docstrings
+ZONE 1 - PREMIUM   -> architecture, UI/UX, planning, client docs
+ZONE 2 - HYBRID    -> reviews, debug, Q&A (DEFAULT)
+ZONE 3 - CAVEMAN   -> terminal, git, package ops, quick queries
 ```
 
----
+Priority:
 
-## Explicit Override Commands
+```text
+Zone 0 > Zone 1 > Zone 2 > Zone 3
+```
 
-| Command    | Effect                                          |
-|------------|-------------------------------------------------|
-| `!verbose` | Force Zone 1 for this response only             |
-| `!code`    | Force Zone 0 output quality for this response   |
-| `!fast`    | Force Zone 3 for this response only             |
-| `!memory`  | Surface relevant cavemem context to user        |
+### Zone 0 - Sacred
 
----
+Use for any file write to source code, comments, docstrings, and production-facing docs. Caveman grammar is banned. Correctness and maintainability take priority over token reduction.
 
-## Anti-Corruption Hard Stops
+### Zone 1 - Premium
 
-Caveman grammar (`Zone 3`) is **permanently banned** from touching:
-- Any source code file (any extension)
-- Inline code comments or docstrings
-- Client-facing documents or proposals
-- Architecture Decision Records
-- `README.md`, `CHANGELOG.md`, `CONTRIBUTING.md`
-- Error messages or log strings in production code
-- UI component names or prop descriptions
+Use for `[PLAN]`, `[ARCH]`, `[DESIGN]`, `[PRD]`, `[BRIEF]`, `[REVIEW]`, architecture, design systems, storyboards, user flows, and diagrams.
 
-Full verbose (`Zone 1`) is **permanently banned** from triggering for:
-- Terminal command output summaries
-- Git log/diff analysis
-- `package.json` or lockfile audits
-- Simple yes/no confirmations
-- Inline debug print statements
+### Zone 2 - Hybrid
 
----
+Use by default for debugging, explanations, comparisons, and general Q&A. Internal analysis may be compressed; final user-facing output remains professional and clear.
 
-## FinOps Ignore Boundaries
+### Zone 3 - Caveman
 
-All ignore files (`.geminiignore`, `.cursorignore`, `.claudeignore`, `.codexignore`, `.openaiignore`) must exclude the following categories from the agent's context window:
+Use for `[CMD]`, `[GIT]`, `[PKG]`, `[QUICK]`, `$` prompts, terminal tasks, package operations, and quick status checks. Keep output terse and operational.
 
-- **Dependency trees:** `node_modules/`, `vendor/`, `packages/*/node_modules/`
-- **Lockfiles:** `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, `Cargo.lock`, `poetry.lock`, `go.sum`
-- **Build artifacts:** `dist/`, `build/`, `.next/`, `.nuxt/`, `target/`, `bin/`, `obj/`
-- **Python environments:** `.venv/`, `venv/`, `env/`, `site-packages/`, `*.egg-info/`, `*.pyd`
-- **Caches:** `.cache/`, `.vite/`, `.turbo/`, `.pytest_cache/`, `.mypy_cache/`
-- **Logs & databases:** `*.log`, `*.sqlite`, `*.db`, `*.sql.gz`
-- **Binary media:** `*.png`, `*.jpg`, `*.mp4`, `*.mp3`, `*.pdf`, `*.woff`, `*.woff2`
-- **Minified bundles:** `*.min.js`, `*.min.css`, `*.map`, `*.chunk.js`
+## Anti-Corruption Rules
 
----
-
-## Token Budget by Zone
-
-| Zone | Name    | Budget Level | Typical Savings vs Baseline |
-|:----:|---------|:------------:|:---------------------------:|
-| 0    | Sacred  | Unconstrained | 0% (correctness first)     |
-| 1    | Premium | High          | 0% (depth first)           |
-| 2    | Hybrid  | Medium        | ~40–50%                    |
-| 3    | Caveman | Minimal       | ~70–90%                    |
-
----
+- Caveman grammar never touches code files, comments, docstrings, READMEs, CHANGELOGs, ADRs, client-facing docs, or production error messages.
+- Full verbose output should not be used for terminal summaries, git log/diff, package audits, or quick confirmations.
+- If a Zone 3 request requires writing a code file, Zone 0 wins automatically.
 
 ## Verification
 
-To verify this skill is active, observe the agent's behaviour:
-1. Run `git status` — response should be terse, 1–3 lines max (`Zone 3`).
-2. Ask "explain what useEffect does" — response should be clear prose but not padded (`Zone 2`).
-3. Ask `[ARCH] design a microservices auth system` — response must include Mermaid diagram and full spec (`Zone 1`).
-4. Edit a `.ts` file — output must use full clean-code standards, zero abbreviation (`Zone 0`).
+To verify installation in a workspace:
+
+1. Confirm all five ignore files exist and match the canonical template.
+2. Confirm `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, and `.cursorrules` exist.
+3. Run `[GIT] status`; the agent response should be terse.
+4. Ask `[ARCH] design a microservices auth system`; the agent response should be detailed and structured.

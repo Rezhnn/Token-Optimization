@@ -1,58 +1,28 @@
-# finops-zones — Skill README
+# geminiignore-finops Skill README
 
-**Version:** 2.0.0 | **Author:** [Rezhnn](https://github.com/Rezhnn) | **Category:** Token Optimization
-
----
+This folder retains the historical `finops-zones` path so existing install URLs remain stable. The skill capability itself follows the maintainer's installed global `geminiignore-finops` setup.
 
 ## What It Does
 
-Installs the Zone-Based Execution Model into your AI coding agent, routing every request to one of four verbosity zones based on task type. The agent stays sharp on code, stays terse on git ops, and stays full-depth on architecture — automatically.
+The skill defines two instruction layers:
 
-**Typical savings: 60–90% on operational tasks.**
+- FinOps ignore boundaries for `.geminiignore`, `.cursorignore`, `.claudeignore`, `.codexignore`, and `.openaiignore`.
+- A hybrid four-zone routing model for agent output discipline.
 
----
+It is instruction-based. It becomes usable when the active agent reads the workspace files written by the installer. It does not install a runtime hook, proxy, token counter, or enforcement daemon.
 
-## Zone Summary
+## Primary Supported Tools
 
-| Zone | Name    | Trigger                              | Grammar Style     | Token Budget   |
-|:----:|---------|--------------------------------------|-------------------|:------------:|
-| 0    | Sacred  | Any code file write                  | Full standard     | Unconstrained |
-| 1    | Premium | `[PLAN]`, `[ARCH]`, architecture kw  | Full verbose      | High          |
-| 2    | Hybrid  | Default (no trigger)                 | Compressed think, proper output | Medium |
-| 3    | Caveman | `[CMD]`, `[GIT]`, `$`, `!fast`       | Ultra-terse       | Minimal       |
+- Antigravity
+- Codex
+- Cursor
+- Claude Code
 
----
+## Verification
 
-## Usage
+After installation, verify behavior in the target workspace:
 
-Once installed, just prefix your messages:
-```
-[PLAN] design the user auth flow for my SaaS
-[GIT] commit all changes with a good message
-[ARCH] draw the microservices architecture
-$ npm install
-[QUICK] what does useEffect do?
-```
-
-Or use force overrides at any point:
-```
-!verbose   → forces full Zone 1 depth this response
-!fast      → forces Zone 3 compression this response
-!code      → forces Zone 0 code quality this response
-```
-
----
-
-## Installation
-
-See the [main INSTALL.md](../../INSTALL.md) for full OS-specific guides.
-
-Quick install (macOS/Linux/WSL):
-```bash
-curl -fsSL https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/install.sh | bash
-```
-
-Windows (PowerShell):
-```powershell
-irm https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/install.ps1 | iex
-```
+1. Confirm all five ignore files exist and have identical content.
+2. Confirm `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, and `.cursorrules` exist.
+3. Ask a Zone 3 prompt such as `[GIT] status`; the response should be terse.
+4. Ask a Zone 1 prompt such as `[PLAN] design an auth flow`; the response should be detailed.

@@ -1,14 +1,16 @@
-# ⚡ FinOps Token Optimization (Zone-Based Execution Model)
+# FinOps Token Optimization (Zone-Based Execution Model)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Supported Tools](https://img.shields.io/badge/Agents-Antigravity%20%7C%20Claude%20Code%20%7C%20Cursor%20%7C%20Codex-blueviolet)](INSTALL.md)
 
-An agent routing protocol for keeping workspace instructions predictable. It routes tasks into explicit zones, trims unnecessary preambles, and keeps terminal and package work terse. The install scripts write the workspace guides and ignore boundaries into the target project, so Antigravity, Claude Code, Cursor, and Codex can use the skill immediately in that workspace after installation. The current benchmark snapshot in `benchmarks/results/results.json` reports 26.8% average savings and 84.5% operational savings on the sample fixture set. Actual results vary by model, prompt shape, and workspace size.
+An instruction-first FinOps setup for AI coding workspaces. It installs aligned ignore boundaries and workspace routing rules so agents avoid unnecessary context, keep terminal work terse, and preserve full quality for code and planning work.
+
+This repository mirrors the global setup installed on the maintainer's device for four primary tools: Antigravity, Codex, Cursor, and Claude Code. It does not modify model pricing, model behavior internally, or provider quota systems. The benefit comes from reducing avoidable context ingestion and from making agent output rules explicit.
 
 ---
 
-## 🚀 Quick Install
+## Quick Install
 
 Run the appropriate command in the root of the project you want to equip:
 
@@ -22,95 +24,95 @@ curl -fsSL https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/inst
 irm https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/install.ps1 | iex
 ```
 
-*For step-by-step manual setup, see [INSTALL.md](INSTALL.md).*
+The scripts write workspace files into the current project. The rules are usable immediately by tools that read those workspace instruction files. They are not a global installer and do not install a background service.
+
+For step-by-step manual setup, see [INSTALL.md](INSTALL.md).
 
 ---
 
-## 🗺️ The Four-Zone Model
+## Installed Capability Model
 
-The core engine shifts verbosity, reasoning depth, and output length based on the current task.
+The public repo follows the same capability shape as the installed global setup:
+
+| Tool | Installed workspace surface | Purpose |
+| --- | --- | --- |
+| Antigravity | `GEMINI.md`, `.geminiignore` | Gemini/Antigravity instructions and shared ignore boundary |
+| Codex | `AGENTS.md`, `.codexignore`, `.openaiignore` | Codex workspace instructions and OpenAI/Codex ignore boundaries |
+| Cursor | `.cursorrules`, `.cursorignore` | Cursor rules and ignore boundary |
+| Claude Code | `CLAUDE.md`, `.claudeignore` | Claude Code instructions and ignore boundary |
+
+All five ignore files use the same template:
+
+- `.geminiignore`
+- `.cursorignore`
+- `.claudeignore`
+- `.codexignore`
+- `.openaiignore`
+
+---
+
+## The Four-Zone Model
+
+The zone system is an instruction contract. It relies on the active agent reading and following the workspace rules.
 
 ![Hybrid Runtime Zone Routing Flowchart](assets/hybrid_zone_routing_flow.svg)
 
-### Zone Details
-
 | Zone | Label | Main Purpose | Style / Grammar | Token Budget |
 |:---:|:---:|---|---|:---:|
-| **0** | **Sacred** | Modifications to source files (`src/**`, `*.ts`, `*.py`) and code-docs (`README.md`, comments, docstrings). | Full standard programming prose. SOLID, KISS, DRY. Zero abbreviation. | **Unconstrained** |
-| **1** | **Premium** | Full-depth system architecture, design specifications, user flows, and planning. | Extended markdown, Mermaid flowcharts, step-by-step storyboards. | **High** |
-| **2** | **Hybrid** | General developer Q&A, explainers, comparative analyses, and troubleshooting. | Default mode. Compressed reasoning, clean final output. | **Medium** |
-| **3** | **Caveman** | Terminal executions, git operations, package installs, and quick confirmations. | Raw, functional caveman grammar. No preambles or conclusions. | **Minimal** |
+| **0** | **Sacred** | Source files, comments, docstrings, and docs writes. | Full standard programming prose. Clean Code, SOLID, KISS, DRY. | **Unconstrained** |
+| **1** | **Premium** | Architecture, UI/UX, planning, PRDs, reviews, and client-facing docs. | Full depth, structured markdown, Mermaid when useful. | **High** |
+| **2** | **Hybrid** | Reviews, debugging, explanations, comparisons, and general Q&A. | Compress internal analysis; keep final output professional. | **Medium** |
+| **3** | **Caveman** | Terminal, git, package operations, and quick queries. | Terse operational output with minimal preamble. | **Minimal** |
 
-### Zone Priority
-
-`Zone 0 > Zone 1 > Zone 2 > Zone 3`
-
-Explicit tags such as `[PLAN]`, `[ARCH]`, `[CMD]`, `[GIT]`, `[PKG]`, and overrides such as `!verbose`, `!code`, and `!fast` control routing before the default zone logic runs.
-
----
-
-## 📊 Token Usage Benchmarks
-
-The current benchmark snapshot in `benchmarks/results/results.json` reports 26.8% average savings and 84.5% operational savings. When refreshing the benchmark harness, use current official model such as GPT-5.4 family models.
-
-### Token Consumption: Before vs. After
+Priority order:
 
 ```text
-Before Model (Always Verbose)
-[████████████████████████████████████████] 100% (Avg. 2,610 tokens)
-
-After Model (Zone-Based Routing)
-[███████████████████████████] 73% (Avg. 1,910 tokens)
-
-Operational Tasks (Git, CLI, Package Installs)
-[██████] 15% (Approx. 84.5% Savings)
+Zone 0 > Zone 1 > Zone 2 > Zone 3
 ```
 
-### Benchmark Results
-
-| Test Query | Target Zone | Baseline (Tokens) | Optimized (Tokens) | Net Savings |
-|:---|:---:|---:|---:|---:|
-| `[GIT] Commit changes and check status` | Zone 3 | 1,200 | 180 | **-85.0%** |
-| `[PKG] Install express and setup script` | Zone 3 | 1,450 | 220 | **-84.8%** |
-| `What does useEffect cleanup do?` | Zone 2 | 2,100 | 1,150 | **-45.2%** |
-| `[ARCH] Design a cache architecture` | Zone 1 | 4,500 | 4,200 | **-6.6%** |
-| `Write a fast binary search in search.ts` | Zone 0 | 3,800 | 3,800 | **0.0% (Sacred)** |
-
-*These rows are sample task fixtures.*
+Explicit tags such as `[PLAN]`, `[ARCH]`, `[CMD]`, `[GIT]`, `[PKG]`, `[QUICK]`, and overrides such as `!verbose`, `!code`, and `!fast` guide routing before default logic runs.
 
 ---
 
-## ⚙️ Supported Agentic Tools
+## Benchmark Status
 
-This repo is designed to work across tools that honor workspace rules and aligned ignore boundaries.
+This repo does not currently include an automated benchmark runner. The files under `benchmarks/` are sample prompts and a placeholder result record for future measurement work.
 
-Installed directly by the scripts:
+Do not cite the benchmark numbers as verified production results until a runner exists that:
+
+- executes the sample prompts,
+- records model and date metadata,
+- counts baseline and routed token usage,
+- writes reproducible output to `benchmarks/results/results.json`.
+
+See [benchmarks/README.md](benchmarks/README.md) for the current benchmark status.
+
+---
+
+## Supported Agentic Tools
+
+Primary supported tools:
 
 - Antigravity
-- Claude Code
-- Cursor
 - Codex
+- Cursor
+- Claude Code
 
-Compatible with the shared boundary files and manual workspace adoption:
-
-- Windsurf
-- Aider
-- Cline
-- Roo Code
-
-The shared boundary files are `.geminiignore`, `.cursorignore`, `.claudeignore`, `.codexignore`, and `.openaiignore`.
+The setup is portable to other tools that honor workspace instruction files and ignore boundaries, but this repo only claims direct support for the four tools above.
 
 ---
 
-## 🧑‍💻 Key Contributors & Sources
+## Key Contributors & Sources
 
-This project is built upon the following works:
-1. [JuliusBrussee](https://github.com/JuliusBrussee) (base caveman concept): original [caveman](https://github.com/JuliusBrussee/caveman) skill template and terse syntax rules.
-2. Anthropic, OpenAI, and Google AI for Developers: routing, verbosity, and current model-family references used by the benchmark notes.
+This project is built upon the following works and local setup references:
+
+1. [JuliusBrussee](https://github.com/JuliusBrussee): original [caveman](https://github.com/JuliusBrussee/caveman) concept and terse syntax inspiration.
+2. Maintainer's global `geminiignore-finops` skill and hybrid runtime rules installed for Antigravity, Codex, Cursor, and Claude Code.
+3. Public agent documentation patterns for workspace instruction files and ignore boundaries.
 
 ---
 
-## 📈 Star History
+## Star History
 
 Track the community growth and engagement of this repository:
 
@@ -118,5 +120,6 @@ Track the community growth and engagement of this repository:
 
 ---
 
-## 📄 License
+## License
+
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
