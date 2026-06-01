@@ -100,7 +100,7 @@ The shared boundary files are `.geminiignore`, `.cursorignore`, `.claudeignore`,
 ## 🧑‍💻 Key Contributors & Sources
 
 This project is built upon the following works:
-1. [JuliusBrussee](https://github.com/JuliusBrussee/caveman) (base caveman concept): original [caveman](https://github.com/JuliusBrussee/caveman) skill template and terse syntax rules.
+1. [JuliusBrussee](https://github.com/JuliusBrussee) (base caveman concept): original [caveman](https://github.com/JuliusBrussee/caveman) skill template and terse syntax rules.
 2. Anthropic, OpenAI, and Google AI for Developers: routing, verbosity, and current model-family references used by the benchmark notes.
 
 ---
