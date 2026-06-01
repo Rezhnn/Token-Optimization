@@ -1,0 +1,48 @@
+# Cursor Agent Rules
+
+This workspace uses the **Zone-Based Execution Model** defined in [HYBRID_RUNTIME_SPEC.md](HYBRID_RUNTIME_SPEC.md). You MUST dynamically shift execution zones depending on the task type.
+
+---
+
+## 1. Execution Zones
+
+```
+ZONE 0 — SACRED         (code files, comments, docstrings)
+ZONE 1 — PREMIUM        (architecture, UI/UX, planning, client docs)
+ZONE 2 — HYBRID         (reviews, debug, internal analysis)     ← DEFAULT
+ZONE 3 — CAVEMAN        (terminal, git, package ops, quick queries)
+```
+
+---
+
+## 2. Dynamic Zone Selection (Implicit & Explicit Rules)
+
+1. **ZONE 0 — SACRED (Highest Priority)**
+   * **Rule:** Strict standard programming grammar. Absolutely NO caveman grammar, sparse syntax, or token-saving abbreviations in output. Use full SOLID, KISS, DRY, and Clean Code principles.
+   * **Scope:** Any file write targeting source code (`src/**`, `lib/**`, `components/**`, `pages/**`, `*.ts`, `*.tsx`, `*.js`, `*.jsx`, `*.py`, `*.go`, `*.rs`, etc.), code docstrings, and comments.
+
+2. **ZONE 1 — PREMIUM**
+   * **Rule:** Full verbose, highly detailed, beautifully structured markdown with rich visuals (Mermaid diagrams). No truncation.
+   * **Explicit Triggers:** User starts prompt with `[PLAN]`, `[ARCH]`, `[DESIGN]`, `[PRD]`, `[BRIEF]`, `[REVIEW]` or overrides with `!verbose` / `!code`.
+   * **Implicit Triggers:** Message mentions "architecture", "design system", "storyboard", "user flow", "diagram", or involves multi-phase planning.
+
+3. **ZONE 2 — HYBRID (Default)**
+   * **Rule:** "Think cheap, output proper." You may use compressed Caveman-style grammar in your internal reasoning/thoughts to save tokens, but your final output to the user in the chat pane must use standard, polite, high-quality prose.
+   * **Scope:** Debug analysis, general Q&A, explanations of code.
+
+4. **ZONE 3 — CAVEMAN**
+   * **Rule:** Ultra-sparse, compressed caveman grammar. Terse, raw, functional. Minimal preamble.
+   * **Explicit Triggers:** User starts prompt with `[CMD]`, `[GIT]`, `[PKG]`, `[QUICK]`, or `$`, or overrides with `!fast`.
+   * **Implicit Triggers:** Command line actions, quick package installs, git commands.
+
+---
+
+## 3. Anti-Corruption Hard Stops
+
+* **NEVER** use Caveman grammar in code files, comments, READMEs, CHANGELOGs, or client-facing docs.
+* **NEVER** write verbose essays for git logs, terminal command summaries, or simple package audits.
+* **CONFLICT RULE:** If a command-line request (Zone 3) requires writing a code helper file, **Zone 0 wins**.
+
+---
+
+*Always reference [HYBRID_RUNTIME_SPEC.md](HYBRID_RUNTIME_SPEC.md) for full context.*

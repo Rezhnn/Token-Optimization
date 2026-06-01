@@ -1,0 +1,104 @@
+# ==============================================================================
+# AI Ignored Files - FinOps Token Optimization System
+# Aligned across .geminiignore, .cursorignore, .claudeignore, .codexignore, .openaiignore
+# ==============================================================================
+node_modules/
+vendor/
+
+# Lockfiles (never needed for reasoning)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+composer.lock
+poetry.lock
+Cargo.lock
+Gemfile.lock
+pubspec.lock
+go.sum
+
+# System files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+
+# Python virtual-environment & package-artifacts (FinOps Hardening)
+.venv/
+venv/
+env/
+ENV/
+.env/
+site-packages/
+pip-wheel-metadata/
+.eggs/
+*.egg-info/
+*.pyd
+
+# Build outputs
+dist/
+build/
+out/
+target/
+.next/
+.nuxt/
+.output/
+bin/
+obj/
+*.class
+*.pyc
+__pycache__/
+*.so
+*.dylib
+*.dll
+*.exe
+.vite/
+.turbo/
+.parcel-cache/
+.eslintcache
+.tsbuildinfo
+
+# Cache directories
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+coverage/
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+*.sql.gz
+
+# Logs
+*.log
+logs/
+
+# Large media & Assets
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.svg
+*.ico
+*.psd
+*.mp4
+*.mp3
+*.wav
+*.pdf
+*.zip
+*.tar.gz
+*.woff
+*.woff2
+*.ttf
+
+# Minified files
+*.min.js
+*.min.css
+*.map
+
+# Test snapshots (read only when explicitly needed)
+**/__snapshots__/
