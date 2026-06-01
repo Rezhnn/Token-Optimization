@@ -89,6 +89,28 @@ See [benchmarks/README.md](benchmarks/README.md) for the current benchmark statu
 
 ---
 
+## Showcase Benchmark Visualization (ESTIMATED)
+
+This visualization is an illustrative model, not a measured benchmark. The chart normalizes the baseline to `100` so the shape of the change is easy to read. The `22` value is a directional example that shows a strong reduction in context load after the workspace rules are applied, not a promise of a specific real-world result.
+
+![Estimated benchmark visualization](assets/showcase_benchmark_visualization_estimated.svg)
+
+How to read the graphic:
+
+- `100` is the normalized "before" baseline.
+- `22` is the illustrative "after" value.
+- The gap between the two bars represents the reduction in avoidable context load, not a billing guarantee and not a provider-side quota change.
+- The estimate assumes the agent follows the workspace files, avoids unnecessary deep reads, and keeps operational output terse when the zone rules call for it.
+- The actual result will vary with task size, model choice, prompt shape, and how much irrelevant context the agent would otherwise ingest.
+
+Why the chart matters:
+
+- The skill is meant to reduce wasted attention on lockfiles, generated bundles, large caches, and other low-value surfaces.
+- Less unnecessary context can leave more room for the actual task, especially when the agent needs to reason over code, docs, or planning work.
+- The visual is intentionally labeled `ESTIMATED` because the repository does not include an automated benchmark runner that can produce a verified measurement set today.
+
+---
+
 ## Supported Agentic Tools
 
 Primary supported tools:
@@ -107,8 +129,7 @@ The setup is portable to other tools that honor workspace instruction files and 
 This project is built upon the following works and local setup references:
 
 1. [JuliusBrussee](https://github.com/JuliusBrussee): original [caveman](https://github.com/JuliusBrussee/caveman) concept and terse syntax inspiration.
-2. Maintainer's global `geminiignore-finops` skill and hybrid runtime rules installed for Antigravity, Codex, Cursor, and Claude Code.
-3. Public agent documentation patterns for workspace instruction files and ignore boundaries.
+2. Anthropic/OpenAI/Google AI : Zone Based Routing, Harness
 
 ---
 
