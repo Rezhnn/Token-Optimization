@@ -90,7 +90,6 @@ Installed directly by the scripts:
 - Claude Code
 - Cursor
 - Codex
-=======
 
 Compatible with the shared boundary files and manual workspace adoption:
 
