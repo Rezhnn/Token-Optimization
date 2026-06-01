@@ -51,7 +51,7 @@ Explicit tags such as `[PLAN]`, `[ARCH]`, `[CMD]`, `[GIT]`, `[PKG]`, and overrid
 
 ## 📊 Token Usage Benchmarks
 
-The current benchmark snapshot in `benchmarks/results/results.json` reports 26.8% average savings and 84.5% operational savings. When refreshing the benchmark harness, use current official model families such as GPT-5.4 family models and Gemini 3 Flash or Gemini 3 Pro preview.
+The current benchmark snapshot in `benchmarks/results/results.json` reports 26.8% average savings and 84.5% operational savings. When refreshing the benchmark harness, use current official model such as GPT-5.4 family models.
 
 ### Token Consumption: Before vs. After
 
@@ -76,7 +76,7 @@ Operational Tasks (Git, CLI, Package Installs)
 | `[ARCH] Design a cache architecture` | Zone 1 | 4,500 | 4,200 | **-6.6%** |
 | `Write a fast binary search in search.ts` | Zone 0 | 3,800 | 3,800 | **0.0% (Sacred)** |
 
-*These rows are sample task fixtures. Refresh them after a new model-family pass.*
+*These rows are sample task fixtures.*
 
 ---
 
@@ -90,7 +90,6 @@ Installed directly by the scripts:
 - Claude Code
 - Cursor
 - Codex
-<<<<<<< HEAD
 =======
 
 Compatible with the shared boundary files and manual workspace adoption:
@@ -99,7 +98,6 @@ Compatible with the shared boundary files and manual workspace adoption:
 - Aider
 - Cline
 - Roo Code
->>>>>>> 3b71a9e (docs: clarify install scope and tool support)
 
 The shared boundary files are `.geminiignore`, `.cursorignore`, `.claudeignore`, `.codexignore`, and `.openaiignore`.
 
