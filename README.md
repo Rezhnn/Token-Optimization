@@ -3,6 +3,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Supported Tools](https://img.shields.io/badge/Agents-Antigravity%20%7C%20Claude%20Code%20%7C%20Cursor%20%7C%20Codex-blueviolet)](INSTALL.md)
+[![Stars](https://img.shields.io/github/stars/Rezhnn/Token-Optimization?style=social)](https://github.com/Rezhnn/Token-Optimization/stargazers)
+[![Forks](https://img.shields.io/github/forks/Rezhnn/Token-Optimization?style=social)](https://github.com/Rezhnn/Token-Optimization/network/members)
+[![Watchers](https://img.shields.io/github/watchers/Rezhnn/Token-Optimization?style=social)](https://github.com/Rezhnn/Token-Optimization/watchers)
 
 An instruction-first FinOps setup for AI coding workspaces. It installs aligned ignore boundaries and workspace routing rules so agents avoid unnecessary context, keep terminal work terse, and preserve full quality for code and planning work.
 
@@ -133,11 +136,30 @@ This project is built upon the following works and local setup references:
 
 ---
 
-## Star History
+## Repository Activity
 
-Track the community growth and engagement of this repository:
+<div align="center">
+
+### Stars Over Time
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Rezhnn/Token-Optimization&type=Date)](https://star-history.com/#Rezhnn/Token-Optimization&Date)
+
+### Live Stats
+
+| Metric | Badge |
+|:---:|:---:|
+| ⭐ Stars | ![Stars](https://img.shields.io/github/stars/Rezhnn/Token-Optimization?style=flat-square&color=yellow&label=Stars) |
+| 🍴 Forks | ![Forks](https://img.shields.io/github/forks/Rezhnn/Token-Optimization?style=flat-square&color=blue&label=Forks) |
+| 👁️ Watchers | ![Watchers](https://img.shields.io/github/watchers/Rezhnn/Token-Optimization?style=flat-square&color=green&label=Watchers) |
+| 🐛 Issues | ![Issues](https://img.shields.io/github/issues/Rezhnn/Token-Optimization?style=flat-square&color=red&label=Open%20Issues) |
+| 📅 Last Commit | ![Last Commit](https://img.shields.io/github/last-commit/Rezhnn/Token-Optimization?style=flat-square&color=purple&label=Last%20Commit) |
+| 📦 Repo Size | ![Repo Size](https://img.shields.io/github/repo-size/Rezhnn/Token-Optimization?style=flat-square&color=orange&label=Repo%20Size) |
+
+### Contributor Activity
+
+[![Contributors](https://contrib.rocks/image?repo=Rezhnn/Token-Optimization)](https://github.com/Rezhnn/Token-Optimization/graphs/contributors)
+
+</div>
 
 ---
 
