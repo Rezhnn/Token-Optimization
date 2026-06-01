@@ -55,7 +55,7 @@ Write-Host ""
 Write-Host "  ✓ Installation complete!" -ForegroundColor Green
 Write-Host ""
 Write-Host "  Zone-Based Execution is now active in this workspace."
-Write-Host "  Use [PLAN], [ARCH], [CMD], [GIT], `$ prefixes to control zones."
+Write-Host "  Use [PLAN], [ARCH], [CMD], [GIT], [PKG], [QUICK], `$ prefixes to control zones."
 Write-Host "  Run '!verbose', '!fast', '!code' mid-session for overrides."
 Write-Host ""
 Write-Host "  Read the docs: $TargetDir\HYBRID_RUNTIME_SPEC.md"

@@ -4,7 +4,7 @@ This directory contains resources for testing and auditing token savings when ru
 
 ## Benchmark Summary
 
-The current snapshot in `results/results.json` reports 26.8% average savings and 84.5% operational savings on the sample fixture set. When you refresh the harness, use the current official model families referenced in the main README: GPT-5.5 or GPT-5.4, and Gemini 3 Flash or Gemini 3 Pro preview.
+The current snapshot in `results/results.json` reports 26.8% average savings and 84.5% operational savings on the sample fixture set. When you refresh the harness, use the current official model families referenced in the main README: GPT-5.4 and Gemini 3 Flash or Gemini 3 Pro preview.
 
 | Test ID | Task Category | Baseline Token Usage | Optimized Token Usage | Savings |
 |:-------:|---------------|:--------------------:|:---------------------:|:-------:|

@@ -4,7 +4,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Supported Tools](https://img.shields.io/badge/Agents-Antigravity%20%7C%20Claude%20Code%20%7C%20Cursor%20%7C%20Codex-blueviolet)](INSTALL.md)
 
-An agent routing protocol for keeping workspace instructions predictable. It routes tasks into explicit zones, trims unnecessary preambles, and keeps terminal and package work terse. The current benchmark snapshot in `benchmarks/results/results.json` reports 26.8% average savings and 84.5% operational savings on the sample fixture set. Actual results vary by model, prompt shape, and workspace size.
+An agent routing protocol for keeping workspace instructions predictable. It routes tasks into explicit zones, trims unnecessary preambles, and keeps terminal and package work terse. The install scripts write the workspace guides and ignore boundaries into the target project, so Antigravity, Claude Code, Cursor, and Codex can use the skill immediately in that workspace after installation. The current benchmark snapshot in `benchmarks/results/results.json` reports 26.8% average savings and 84.5% operational savings on the sample fixture set. Actual results vary by model, prompt shape, and workspace size.
 
 ---
 
@@ -51,7 +51,7 @@ Explicit tags such as `[PLAN]`, `[ARCH]`, `[CMD]`, `[GIT]`, `[PKG]`, and overrid
 
 ## 📊 Token Usage Benchmarks
 
-The current benchmark snapshot in `benchmarks/results/results.json` reports 26.8% average savings and 84.5% operational savings. When refreshing the benchmark harness, use current official model families such as GPT-5.4-Mini.
+The current benchmark snapshot in `benchmarks/results/results.json` reports 26.8% average savings and 84.5% operational savings. When refreshing the benchmark harness, use current official model families such as GPT-5.4 family models and Gemini 3 Flash or Gemini 3 Pro preview.
 
 ### Token Consumption: Before vs. After
 
@@ -82,12 +82,24 @@ Operational Tasks (Git, CLI, Package Installs)
 
 ## ⚙️ Supported Agentic Tools
 
-This repo is designed to work across tools that honor workspace rules and aligned ignore boundaries:
+This repo is designed to work across tools that honor workspace rules and aligned ignore boundaries.
+
+Installed directly by the scripts:
 
 - Antigravity
 - Claude Code
 - Cursor
 - Codex
+<<<<<<< HEAD
+=======
+
+Compatible with the shared boundary files and manual workspace adoption:
+
+- Windsurf
+- Aider
+- Cline
+- Roo Code
+>>>>>>> 3b71a9e (docs: clarify install scope and tool support)
 
 The shared boundary files are `.geminiignore`, `.cursorignore`, `.claudeignore`, `.codexignore`, and `.openaiignore`.
 
