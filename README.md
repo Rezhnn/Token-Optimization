@@ -142,7 +142,7 @@ This project is built upon the following works and local setup references:
 
 ### Stars Over Time
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Rezhnn/Token-Optimization&type=Date)](https://star-history.com/#Rezhnn/Token-Optimization&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Rezhnn/Token-Optimization&type=Date&t=1)](https://star-history.com/#Rezhnn/Token-Optimization&Date)
 
 ### Live Stats
 
