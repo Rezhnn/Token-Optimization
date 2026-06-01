@@ -2,15 +2,15 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Supported Tools](https://img.shields.io/badge/Agents-Claude%20%7C%20Gemini%20%7C%20Cursor%20%7C%20Aider-blueviolet)](INSTALL.md)
+[![Supported Tools](https://img.shields.io/badge/Agents-Antigravity%20%7C%20Claude%20Code%20%7C%20Cursor%20%7C%20Codex-blueviolet)](INSTALL.md)
 
-An intelligent, workspace-level orchestration protocol designed to reduce LLM API cost and token usage by **60% to 90%** on routine tasks, without sacrificing correctness in production code.
+An agent routing protocol for keeping workspace instructions predictable. It routes tasks into explicit zones, trims unnecessary preambles, and keeps terminal and package work terse. The current benchmark snapshot in `benchmarks/results/results.json` reports 26.8% average savings and 84.5% operational savings on the sample fixture set. Actual results vary by model, prompt shape, and workspace size.
 
 ---
 
 ## 🚀 Quick Install
 
-Run the appropriate command in your project's root directory:
+Run the appropriate command in the root of the project you want to equip:
 
 ### macOS / Linux / WSL (Bash)
 ```bash
@@ -28,27 +28,9 @@ irm https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/install.ps1
 
 ## 🗺️ The Four-Zone Model
 
-The core engine is a dynamic routing system that shifts the agent's verbosity, reasoning depth, and output length based on the current task.
+The core engine shifts verbosity, reasoning depth, and output length based on the current task.
 
-```mermaid
-graph TD
-    classDef sacred fill:#10b981,stroke:#047857,stroke-width:2px,color:#fff;
-    classDef premium fill:#3b82f6,stroke:#1d4ed8,stroke-width:2px,color:#fff;
-    classDef hybrid fill:#f59e0b,stroke:#b45309,stroke-width:2px,color:#fff;
-    classDef caveman fill:#ef4444,stroke:#b91c1c,stroke-width:2px,color:#fff;
-
-    Z0["🟢 ZONE 0: SACRED<br>(Code & Docs Writes)<br>Full Clean Code & SOLID<br>Zero Abbreviations"]:::sacred
-    Z1["🔵 ZONE 1: PREMIUM<br>([PLAN] [ARCH] [DESIGN])<br>Full Storyboards & Diagrams<br>Mermaid Visuals Enforced"]:::premium
-    Z2["🟡 ZONE 2: HYBRID<br>(Default Q&A & Debug)<br>Compressed Internal Reasoning<br>Polite, Concise Prose"]:::hybrid
-    Z3["🔴 ZONE 3: CAVEMAN<br>([CMD] [GIT] [$] [PKG])<br>Ultra-Terse Commands<br>Preambles Completely Stripped"]:::caveman
-
-    Z0 -->|Override: !code| Z2
-    Z1 -->|Override: !verbose| Z2
-    Z2 -->|Default State| Z2
-    Z3 -->|Override: !fast| Z2
-
-    style Z2 stroke-dasharray: 5 5
-```
+![Hybrid Runtime Zone Routing Flowchart](assets/hybrid_zone_routing_flow.svg)
 
 ### Zone Details
 
@@ -56,14 +38,20 @@ graph TD
 |:---:|:---:|---|---|:---:|
 | **0** | **Sacred** | Modifications to source files (`src/**`, `*.ts`, `*.py`) and code-docs (`README.md`, comments, docstrings). | Full standard programming prose. SOLID, KISS, DRY. Zero abbreviation. | **Unconstrained** |
 | **1** | **Premium** | Full-depth system architecture, design specifications, user flows, and planning. | Extended markdown, Mermaid flowcharts, step-by-step storyboards. | **High** |
-| **2** | **Hybrid** | General developer Q&A, explainers, comparative analyses, and troubleshooting. | **Default Mode.** Compressed/terse internal reasoning, clean final output. | **Medium** |
-| **3** | **Caveman** | Terminal executions, git operations, packages installations, and fast confirmations. | Raw, functional "caveman grammar." No preambles, greetings, or conclusions. | **Minimal** |
+| **2** | **Hybrid** | General developer Q&A, explainers, comparative analyses, and troubleshooting. | Default mode. Compressed reasoning, clean final output. | **Medium** |
+| **3** | **Caveman** | Terminal executions, git operations, package installs, and quick confirmations. | Raw, functional caveman grammar. No preambles or conclusions. | **Minimal** |
+
+### Zone Priority
+
+`Zone 0 > Zone 1 > Zone 2 > Zone 3`
+
+Explicit tags such as `[PLAN]`, `[ARCH]`, `[CMD]`, `[GIT]`, `[PKG]`, and overrides such as `!verbose`, `!code`, and `!fast` control routing before the default zone logic runs.
 
 ---
 
 ## 📊 Token Usage Benchmarks
 
-By limiting unnecessary responses and preambles during routine commands, context windows stay lightweight, keeping execution fast and API costs minimal.
+The current benchmark snapshot in `benchmarks/results/results.json` reports 26.8% average savings and 84.5% operational savings. When refreshing the benchmark harness, use current official model families such as GPT-5.5 or GPT-5.4, and Gemini 3 Flash or Gemini 3 Pro preview.
 
 ### Token Consumption: Before vs. After
 
@@ -72,39 +60,48 @@ Before Model (Always Verbose)
 [████████████████████████████████████████] 100% (Avg. 2,610 tokens)
 
 After Model (Zone-Based Routing)
-[████████████████████] 50% (Avg. 1,305 tokens)
+[███████████████████████████] 73% (Avg. 1,910 tokens)
 
 Operational Tasks (Git, CLI, Package Installs)
-[████] 10% (Avg. 200 tokens — 90% Savings)
+[██████] 15% (Approx. 84.5% Savings)
 ```
 
-### Benchmark Results (Gemini 1.5 Pro / Claude 3.5 Sonnet)
+### Benchmark Results
 
 | Test Query | Target Zone | Baseline (Tokens) | Optimized (Tokens) | Net Savings |
-|:---|:---:|:---:|:---:|:---:|
+|:---|:---:|---:|---:|---:|
 | `[GIT] Commit changes and check status` | Zone 3 | 1,200 | 180 | **-85.0%** |
 | `[PKG] Install express and setup script` | Zone 3 | 1,450 | 220 | **-84.8%** |
 | `What does useEffect cleanup do?` | Zone 2 | 2,100 | 1,150 | **-45.2%** |
 | `[ARCH] Design a cache architecture` | Zone 1 | 4,500 | 4,200 | **-6.6%** |
 | `Write a fast binary search in search.ts` | Zone 0 | 3,800 | 3,800 | **0.0% (Sacred)** |
 
+*These rows are sample task fixtures. Refresh them after a new model-family pass.*
+
 ---
 
 ## ⚙️ Supported Agentic Tools
-This model is compatible with any agentic workspace that supports system instructions or custom rules:
-- **Google Antigravity SDK** (`GEMINI.md` / `.geminiignore`)
-- **Claude Code** (`CLAUDE.md` / `.claudeignore`)
-- **Cursor IDE** (`.cursorrules` / `.cursorignore`)
-- **Windsurf** (`.windsurf` configuration)
-- **Aider / Cline / Roo Code** (Universal system instructions)
+
+This repo is designed to work across tools that honor workspace rules and aligned ignore boundaries:
+
+- Antigravity / Gemini
+- Claude Code
+- Cursor
+- Codex
+- Windsurf
+- Aider
+- Cline
+- Roo Code
+
+The shared boundary files are `.geminiignore`, `.cursorignore`, `.claudeignore`, `.codexignore`, and `.openaiignore`.
 
 ---
 
 ## 🧑‍💻 Key Contributors & Sources
 
 This project is built upon the following works:
-1. **JuliusBrussee (Base Caveman Concept):** Creator of the original [caveman](https://github.com/JuliusBrussee/caveman) skill template and terse syntax rules.
-2. **Anthropic & OpenAI (Verbosity Research):** Core insights regarding LLM prompt engineering, verbosity costs, and system prompt formatting limits.
+1. JuliusBrussee (base caveman concept): original [caveman](https://github.com/JuliusBrussee/caveman) skill template and terse syntax rules.
+2. Anthropic, OpenAI, and Google AI for Developers: routing, verbosity, and current model-family references used by the benchmark notes.
 
 ---
 
@@ -117,4 +114,4 @@ Track the community growth and engagement of this repository:
 ---
 
 ## 📄 License
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
