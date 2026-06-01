@@ -51,7 +51,7 @@ Explicit tags such as `[PLAN]`, `[ARCH]`, `[CMD]`, `[GIT]`, `[PKG]`, and overrid
 
 ## 📊 Token Usage Benchmarks
 
-The current benchmark snapshot in `benchmarks/results/results.json` reports 26.8% average savings and 84.5% operational savings. When refreshing the benchmark harness, use current official model families such as GPT-5.5 or GPT-5.4, and Gemini 3 Flash or Gemini 3 Pro preview.
+The current benchmark snapshot in `benchmarks/results/results.json` reports 26.8% average savings and 84.5% operational savings. When refreshing the benchmark harness, use current official model families such as GPT-5.4-Mini.
 
 ### Token Consumption: Before vs. After
 
@@ -100,7 +100,7 @@ The shared boundary files are `.geminiignore`, `.cursorignore`, `.claudeignore`,
 ## 🧑‍💻 Key Contributors & Sources
 
 This project is built upon the following works:
-1. JuliusBrussee (base caveman concept): original [caveman](https://github.com/JuliusBrussee/caveman) skill template and terse syntax rules.
+1. [JuliusBrussee](https://github.com/JuliusBrussee/caveman) (base caveman concept): original [caveman](https://github.com/JuliusBrussee/caveman) skill template and terse syntax rules.
 2. Anthropic, OpenAI, and Google AI for Developers: routing, verbosity, and current model-family references used by the benchmark notes.
 
 ---
