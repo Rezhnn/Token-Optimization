@@ -84,14 +84,10 @@ Operational Tasks (Git, CLI, Package Installs)
 
 This repo is designed to work across tools that honor workspace rules and aligned ignore boundaries:
 
-- Antigravity / Gemini
+- Antigravity
 - Claude Code
 - Cursor
 - Codex
-- Windsurf
-- Aider
-- Cline
-- Roo Code
 
 The shared boundary files are `.geminiignore`, `.cursorignore`, `.claudeignore`, `.codexignore`, and `.openaiignore`.
 
