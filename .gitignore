@@ -1,0 +1,11 @@
+# System & Local IDE Noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+
+# Caches & temporary results
+benchmarks/results/*.tmp
+.cache/
+.tsbuildinfo

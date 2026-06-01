@@ -1,11 +1,13 @@
 # ==============================================================================
-# AI Ignored Files - FinOps Token Optimization System
-# Aligned across .geminiignore, .cursorignore, .claudeignore, .codexignore, .openaiignore
+# .geminiignore / .cursorignore / .claudeignore / .codexignore / .openaiignore
+# FinOps Token Optimization — Universal AI Boundary File
+# Version: 2.0.0 | https://github.com/Rezhnn/Token-Optimization
 # ==============================================================================
+
+# 1. DEPENDENCY TREES & LOCK FILES
 node_modules/
 vendor/
-
-# Lockfiles (never needed for reasoning)
+packages/*/node_modules/
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
@@ -15,16 +17,19 @@ Cargo.lock
 Gemfile.lock
 pubspec.lock
 go.sum
+mix.lock
+Pipfile.lock
 
-# System files
+# 2. SYSTEM & IDE NOISE
 .DS_Store
 Thumbs.db
+$RECYCLE.BIN/
 .idea/
 .vscode/*
 !.vscode/settings.json
 !.vscode/launch.json
 
-# Python virtual-environment & package-artifacts (FinOps Hardening)
+# 3. PYTHON VIRTUAL ENVIRONMENTS & PACKAGE ARTIFACTS
 .venv/
 venv/
 env/
@@ -36,7 +41,7 @@ pip-wheel-metadata/
 *.egg-info/
 *.pyd
 
-# Build outputs
+# 4. BUILD ARTIFACTS & COMPILED CODE
 dist/
 build/
 out/
@@ -44,6 +49,8 @@ target/
 .next/
 .nuxt/
 .output/
+.svelte-kit/
+.serverless/
 bin/
 obj/
 *.class
@@ -53,30 +60,39 @@ __pycache__/
 *.dylib
 *.dll
 *.exe
+*.o
+*.a
+*.lib
+
+# 5. CACHES, METADATA & COVERAGE
+.cache/
 .vite/
 .turbo/
 .parcel-cache/
 .eslintcache
+.babel-cache/
 .tsbuildinfo
-
-# Cache directories
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
 coverage/
+.nyc_output/
+.tox/
 
-# Database files
+# 6. DATABASES & LOGS
+*.log
 *.sqlite
 *.sqlite3
 *.db
 *.sql
 *.sql.gz
-
-# Logs
-*.log
+*.pb
+*.mongo
+*.rdb
+storage/logs/
 logs/
 
-# Large media & Assets
+# 7. BINARY, MULTIMEDIA & HEAVY ASSETS
 *.png
 *.jpg
 *.jpeg
@@ -85,20 +101,26 @@ logs/
 *.svg
 *.ico
 *.psd
+*.fig
 *.mp4
 *.mp3
 *.wav
 *.pdf
 *.zip
 *.tar.gz
+*.rar
+*.7z
 *.woff
 *.woff2
 *.ttf
+*.eot
 
-# Minified files
+# 8. MINIFIED & COMPILED WEB ASSETS
 *.min.js
 *.min.css
+*.chunk.js
+*.bundle.js
 *.map
 
-# Test snapshots (read only when explicitly needed)
+# 9. TEST SNAPSHOTS
 **/__snapshots__/

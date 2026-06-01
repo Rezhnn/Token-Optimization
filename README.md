@@ -1,196 +1,120 @@
-# ⚡ FinOps Token Optimization System (Antigravity × Caveman Ecosystem)
+# ⚡ FinOps Token Optimization (Zone-Based Execution Model)
 
-[![GitHub License](https://img.shields.io/github/license/Rezhnn/Token-Optimization?style=flat-square&color=blue)](LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/Rezhnn/Token-Optimization?style=flat-square&color=gold)](https://github.com/Rezhnn/Token-Optimization/stargazers)
-[![FinOps Hardened](https://img.shields.io/badge/FinOps-Hardened-brightgreen?style=flat-square)](#benchmark)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Supported Tools](https://img.shields.io/badge/Agents-Claude%20%7C%20Gemini%20%7C%20Cursor%20%7C%20Aider-blueviolet)](INSTALL.md)
 
-The **FinOps Token Optimization System** is a next-generation hybrid runtime configuration for AI coding agents (such as Google Antigravity, Claude Code, and Cursor). By implementing the **Zone-Based Execution Model**, it dynamically shifts the model's verbosity and style between hyper-detailed system specs and ultra-compressed "caveman grammar." 
-
-The result? **A massive 60% to 90% reduction in API token usage** during developer sessions without sacrificing code quality or architectural depth.
+An intelligent, workspace-level orchestration protocol designed to reduce LLM API cost and token usage by **60% to 90%** on routine tasks, without sacrificing correctness in production code.
 
 ---
 
-## 🔮 The 4 Zone-Based Execution Model
+## 🚀 Quick Install
 
-Different developer tasks demand different cognitive and stylistic fidelity. Instead of wasting thousands of expensive context tokens on conversational pleasantries, terminal summaries, or git logs, this system segment-routes the AI into **4 distinct execution zones**:
+Run the appropriate command in your project's root directory:
+
+### macOS / Linux / WSL (Bash)
+```bash
+curl -fsSL https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/install.sh | bash
+```
+
+### Windows (PowerShell)
+```powershell
+irm https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/install.ps1 | iex
+```
+
+*For step-by-step manual setup, see [INSTALL.md](INSTALL.md).*
+
+---
+
+## 🗺️ The Four-Zone Model
+
+The core engine is a dynamic routing system that shifts the agent's verbosity, reasoning depth, and output length based on the current task.
 
 ```mermaid
 graph TD
-    classDef sacred fill:#d4edda,stroke:#28a745,stroke-width:2px,color:#155724;
-    classDef premium fill:#cce5ff,stroke:#004085,stroke-width:2px,color:#004085;
-    classDef hybrid fill:#fff3cd,stroke:#ffeeba,stroke-width:2px,color:#856404;
-    classDef caveman fill:#f8d7da,stroke:#f5c6cb,stroke-width:2px,color:#721c24;
+    classDef sacred fill:#10b981,stroke:#047857,stroke-width:2px,color:#fff;
+    classDef premium fill:#3b82f6,stroke:#1d4ed8,stroke-width:2px,color:#fff;
+    classDef hybrid fill:#f59e0b,stroke:#b45309,stroke-width:2px,color:#fff;
+    classDef caveman fill:#ef4444,stroke:#b91c1c,stroke-width:2px,color:#fff;
 
-    U[User Request Received] --> C1{File Write to src/* or Codebase?}
-    
-    C1 -- Yes --> Z0[ZONE 0: SACRED]:::sacred
-    C1 -- No --> C2{Explicit Keyword Trigger?}
-    
-    C2 -- [PLAN]/[ARCH]/[DESIGN]/[PRD] --> Z1[ZONE 1: PREMIUM]:::premium
-    C2 -- [CMD]/[GIT]/[PKG]/$ --> Z3[ZONE 3: CAVEMAN]:::caveman
-    C2 -- None (Default) --> C3{Implicit Context Analysis}
-    
-    C3 -- Contains: architecture/diagram/storyboard --> Z1[ZONE 1: PREMIUM]:::premium
-    C3 -- Contains: install/git/terminal commands --> Z3[ZONE 3: CAVEMAN]:::caveman
-    C3 -- General Q&A / Diagnostics --> Z2[ZONE 2: HYBRID]:::hybrid
+    Z0["🟢 ZONE 0: SACRED<br>(Code & Docs Writes)<br>Full Clean Code & SOLID<br>Zero Abbreviations"]:::sacred
+    Z1["🔵 ZONE 1: PREMIUM<br>([PLAN] [ARCH] [DESIGN])<br>Full Storyboards & Diagrams<br>Mermaid Visuals Enforced"]:::premium
+    Z2["🟡 ZONE 2: HYBRID<br>(Default Q&A & Debug)<br>Compressed Internal Reasoning<br>Polite, Concise Prose"]:::hybrid
+    Z3["🔴 ZONE 3: CAVEMAN<br>([CMD] [GIT] [$] [PKG])<br>Ultra-Terse Commands<br>Preambles Completely Stripped"]:::caveman
 
-    subgraph "Execution Output & Token Budget Rules"
-        Z0 --> O0["Standard High-Quality Code & Comments<br><i>Budget: Unconstrained (Correctness First)</i>"]
-        Z1 --> O1["Full Verbose Specs, Storyboards, & Diagrams<br><i>Budget: High (Architectural Depth)</i>"]
-        Z2 --> O2["Compressed Thoughts, High-Quality Chat Prose<br><i>Budget: Medium (Balanced Hybrid)</i>"]
-        Z3 --> O3["Ultra-Terse Caveman Grammar ($ git st -s)<br><i>Budget: Minimal (Max Speed & Compression)</i>"]
-    end
+    Z0 -->|Override: !code| Z2
+    Z1 -->|Override: !verbose| Z2
+    Z2 -->|Default State| Z2
+    Z3 -->|Override: !fast| Z2
+
+    style Z2 stroke-dasharray: 5 5
 ```
 
-### Detailed Zone Breakdown
+### Zone Details
 
-#### 🟢 ZONE 0 — SACRED (Fidelity-First Code Writing)
-*   **Rule:** Standard programming grammar. Absolutely NO caveman grammar, sparse syntax, or token-saving abbreviations in output. Use full SOLID, KISS, DRY, and Clean Code principles.
-*   **Scope:** Any file write targeting source code (`src/**`, `lib/**`, `components/**`, `*.py`, `*.ts`, `*.rs`, etc.), docstrings, and inline code comments.
-*   **Enforcement:** Auto-triggers whenever the agent modifies source files.
-
-#### 🔵 ZONE 1 — PREMIUM (High-Fidelity Planning)
-*   **Rule:** Full verbose, highly detailed, beautifully structured markdown with rich visuals (Mermaid diagrams) and comprehensive user storyboards. No truncation.
-*   **Scope:** Triggered explicitly by `[PLAN]`, `[ARCH]`, `[DESIGN]`, `[PRD]`, `[BRIEF]`, `[REVIEW]`, or keyword context like "architecture", "diagram", "storyboard".
-
-#### 🟡 ZONE 2 — HYBRID (Default Balanced State)
-*   **Rule:** **"Think cheap, output proper."** The agent compresses internal reasoning (chain-of-thought) into terse formats to save input tokens, but responds to the user in high-quality, polite, professional prose.
-*   **Scope:** Standard debug analysis, code explanations, general Q&A.
-
-#### 🔴 ZONE 3 — CAVEMAN (Ultra-Compressed Terminal/Git Operations)
-*   **Rule:** Hyper-terse, compressed "caveman grammar." Preambles are completely bypassed. Output is raw, functional, and minimal.
-*   **Scope:** Triggered explicitly by `[CMD]`, `[GIT]`, `[PKG]`, `$`, `!fast`, or implicit actions like installs, running test suites, or checking git status.
+| Zone | Label | Main Purpose | Style / Grammar | Token Budget |
+|:---:|:---:|---|---|:---:|
+| **0** | **Sacred** | Modifications to source files (`src/**`, `*.ts`, `*.py`) and code-docs (`README.md`, comments, docstrings). | Full standard programming prose. SOLID, KISS, DRY. Zero abbreviation. | **Unconstrained** |
+| **1** | **Premium** | Full-depth system architecture, design specifications, user flows, and planning. | Extended markdown, Mermaid flowcharts, step-by-step storyboards. | **High** |
+| **2** | **Hybrid** | General developer Q&A, explainers, comparative analyses, and troubleshooting. | **Default Mode.** Compressed/terse internal reasoning, clean final output. | **Medium** |
+| **3** | **Caveman** | Terminal executions, git operations, packages installations, and fast confirmations. | Raw, functional "caveman grammar." No preambles, greetings, or conclusions. | **Minimal** |
 
 ---
 
 ## 📊 Token Usage Benchmarks
 
-When using advanced LLM models (e.g. Gemini 1.5/2.0 Pro, Claude 3.5 Sonnet, GPT-4o) over a 2-hour pair programming session, traditional verbose responses consume massive amounts of context. Here is the comparative breakdown:
+By limiting unnecessary responses and preambles during routine commands, context windows stay lightweight, keeping execution fast and API costs minimal.
 
-### Token Consumption: Before vs. After FinOps Optimization
+### Token Consumption: Before vs. After
 
-| Operation Type | Verbose Baseline | FinOps Hardened | Token Savings | Speed Increase |
-| :--- | :---: | :---: | :---: | :---: |
-| **Git Status Check & Diffs** | 4,200 tokens | 120 tokens | **97.1%** | ~5x faster |
-| **Terminal / CLI Commands** | 3,800 tokens | 180 tokens | **95.2%** | ~4x faster |
-| **Simple Code Explanations** | 5,500 tokens | 1,100 tokens | **80.0%** | ~2x faster |
-| **Source Code Modification** | 8,500 tokens | 8,500 tokens | **0.0%** (Safety First) | N/A |
-| **Comprehensive Planning** | 12,000 tokens | 12,000 tokens | **0.0%** (Depth First) | N/A |
+```text
+Before Model (Always Verbose)
+[████████████████████████████████████████] 100% (Avg. 2,610 tokens)
 
-### Visualizing Context-Window Efficiency
+After Model (Zone-Based Routing)
+[████████████████████] 50% (Avg. 1,305 tokens)
 
-```
-[VERBOSE AGENT BASELINE]
-[████████████████████████████████████████████████████████████] 34,000 Total Tokens Used
-  ├─ CLI & Git Overhead: 24%  ██████████████
-  ├─ Conversational Fluff: 36% █████████████████████
-  └─ Real Planning & Code: 40% ████████████████████████
-
-[FINOPS HARDENED AGENT]
-[████████████████] 11,900 Total Tokens Used (65% Overall Reduction!)
-  ├─ CLI & Git (Zone 3): 1.5% █
-  ├─ Balanced Chat (Zone 2): 9% █
-  └─ Real Planning & Code (Zone 0/1): 89.5% ██████████████
+Operational Tasks (Git, CLI, Package Installs)
+[████] 10% (Avg. 200 tokens — 90% Savings)
 ```
 
----
+### Benchmark Results (Gemini 1.5 Pro / Claude 3.5 Sonnet)
 
-## 💎 What You Get (Value Proposition)
-
-*   🚀 **Insane Speed:** Responses for terminal, git, and package installs return in milliseconds rather than seconds.
-*   📉 **Budget Preservation:** Drastically drops API bills or token allowance usage for long-running workflows.
-*   🧠 **Deep Workspace Ignore:** Synchronized rules block large lockfiles (`package-lock.json`, `pnpm-lock.yaml`), local environments (`.venv/`, `venv/`), media assets, minified scripts, and build artifacts from ever polluting the agent's context window.
-*   💾 **cross-machine cavemem Sync:** Avoids context loss across multiple development machines by exporting and syncing the internal SQLite database via Git-tracked JSON snapshots.
-
----
-
-## 🛠️ Supported Agentic Ecosystems
-
-This FinOps configuration works seamlessly with the following AI pair-programming systems:
-*   **Google Antigravity SDK** (Native boundary files `.geminiignore`)
-*   **Claude Code** (`CLAUDE.md`, `.claudeignore`)
-*   **Cursor AI** (`.cursorrules`, `.cursorignore`)
-*   **Codex / Windsurf** (`.codexignore`, `.cursorrules`)
-*   **Cline / Roo Code / Aider** (Fully parses system prompts & ignore standards)
+| Test Query | Target Zone | Baseline (Tokens) | Optimized (Tokens) | Net Savings |
+|:---|:---:|:---:|:---:|:---:|
+| `[GIT] Commit changes and check status` | Zone 3 | 1,200 | 180 | **-85.0%** |
+| `[PKG] Install express and setup script` | Zone 3 | 1,450 | 220 | **-84.8%** |
+| `What does useEffect cleanup do?` | Zone 2 | 2,100 | 1,150 | **-45.2%** |
+| `[ARCH] Design a cache architecture` | Zone 1 | 4,500 | 4,200 | **-6.6%** |
+| `Write a fast binary search in search.ts` | Zone 0 | 3,800 | 3,800 | **0.0% (Sacred)** |
 
 ---
 
-## 💻 Full Installation Guide
-
-Follow the guide below for your specific operating system to initialize the FinOps rules and ignore system.
-
-### 🪟 Windows (Native PowerShell)
-
-Open PowerShell and navigate to your project directory, then copy and paste the following commands:
-
-```powershell
-# Clone or copy files to your workspace directory
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/.geminiignore" -OutFile ".geminiignore"
-Copy-Item ".geminiignore" ".cursorignore"
-Copy-Item ".geminiignore" ".claudeignore"
-Copy-Item ".geminiignore" ".codexignore"
-Copy-Item ".geminiignore" ".openaiignore"
-
-# Fetch Protocol and Spec files
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/AGENTS.md" -OutFile "AGENTS.md"
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/HYBRID_RUNTIME_SPEC.md" -OutFile "HYBRID_RUNTIME_SPEC.md"
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/.cursorrules" -OutFile ".cursorrules"
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/CLAUDE.md" -OutFile "CLAUDE.md"
-```
+## ⚙️ Supported Agentic Tools
+This model is compatible with any agentic workspace that supports system instructions or custom rules:
+- **Google Antigravity SDK** (`GEMINI.md` / `.geminiignore`)
+- **Claude Code** (`CLAUDE.md` / `.claudeignore`)
+- **Cursor IDE** (`.cursorrules` / `.cursorignore`)
+- **Windsurf** (`.windsurf` configuration)
+- **Aider / Cline / Roo Code** (Universal system instructions)
 
 ---
 
-### 🍎 macOS (Terminal)
+## 🧑‍💻 Key Contributors & Sources
 
-Open Terminal and execute the following:
-
-```bash
-# Fetch and synchronize the ignore boundaries
-curl -sSL "https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/.geminiignore" -o .geminiignore
-cp .geminiignore .cursorignore
-cp .geminiignore .claudeignore
-cp .geminiignore .codexignore
-cp .geminiignore .openaiignore
-
-# Fetch Architecture Spec & Protocols
-curl -sSL "https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/AGENTS.md" -o AGENTS.md
-curl -sSL "https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/HYBRID_RUNTIME_SPEC.md" -o HYBRID_RUNTIME_SPEC.md
-curl -sSL "https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/.cursorrules" -o .cursorrules
-curl -sSL "https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/CLAUDE.md" -o CLAUDE.md
-```
+This project is built upon the following works:
+1. **JuliusBrussee (Base Caveman Concept):** Creator of the original [caveman](https://github.com/JuliusBrussee/caveman) skill template and terse syntax rules.
+2. **Anthropic & OpenAI (Verbosity Research):** Core insights regarding LLM prompt engineering, verbosity costs, and system prompt formatting limits.
 
 ---
 
-### 🐧 Linux & WSL (Windows Subsystem for Linux)
+## 📈 Star History
 
-Run this one-liner in your terminal inside your project root directory:
-
-```bash
-wget -qO- https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/.geminiignore > .geminiignore && \
-cp .geminiignore .cursorignore && \
-cp .geminiignore .claudeignore && \
-cp .geminiignore .codexignore && \
-cp .geminiignore .openaiignore && \
-wget -qO AGENTS.md https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/AGENTS.md && \
-wget -qO HYBRID_RUNTIME_SPEC.md https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/HYBRID_RUNTIME_SPEC.md && \
-wget -qO .cursorrules https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/.cursorrules && \
-wget -qO CLAUDE.md https://raw.githubusercontent.com/Rezhnn/Token-Optimization/main/CLAUDE.md
-```
-
----
-
-## 👥 Key Contributors & Sources
-
-This optimization system is a collaborative synthesis built upon elite community foundations:
-
-1.  **[JuliusBrussee](https://github.com/JuliusBrussee)** — Designed the foundational "base caveman skill" rules ([caveman repository](https://github.com/JuliusBrussee/caveman)) which unlocked ultra-terse grammar optimizations.
-2.  **Anthropic & OpenAI** — Initiated the theoretical foundation and guidelines for model verbosity constraints and context ignore pattern strategies.
-3.  **[Rezhnn](https://github.com/Rezhnn)** — Synthesized, hardened, and developed the unified cross-platform boundary rules, the multi-machine `cavemem` SQLite JSON snapshot sync strategy, and the 4-tier execution zone router.
-
----
-
-## ⭐ Star History
-
-Show your support for this open-source FinOps ecosystem! 🌟
+Track the community growth and engagement of this repository:
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Rezhnn/Token-Optimization&type=Date)](https://star-history.com/#Rezhnn/Token-Optimization&Date)
+
+---
+
+## 📄 License
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.

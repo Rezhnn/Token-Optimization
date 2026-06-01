@@ -4,7 +4,7 @@
 # Version: 2.0.0 | https://github.com/Rezhnn/Token-Optimization
 # ==============================================================================
 
-# 1. DEPENDENCY TREES & LOCK FILES
+# 1. DEPENDENCY TREES & LOCK FILES (MASSIVE TOKEN DRAINS)
 node_modules/
 vendor/
 packages/*/node_modules/
@@ -28,6 +28,9 @@ $RECYCLE.BIN/
 .vscode/*
 !.vscode/settings.json
 !.vscode/launch.json
+*.suo
+*.ntvs*
+*.njsproj
 
 # 3. PYTHON VIRTUAL ENVIRONMENTS & PACKAGE ARTIFACTS
 .venv/
@@ -122,5 +125,5 @@ logs/
 *.bundle.js
 *.map
 
-# 9. TEST SNAPSHOTS
+# 9. TEST SNAPSHOTS (read only when explicitly needed)
 **/__snapshots__/

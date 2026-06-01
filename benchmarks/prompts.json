@@ -1,0 +1,32 @@
+[
+  {
+    "id": "p1",
+    "description": "Standard Git Status Check",
+    "prompt": "[GIT] Show current status of repository",
+    "expected_zone": 3
+  },
+  {
+    "id": "p2",
+    "description": "Package Installation",
+    "prompt": "[PKG] Install lodash as a dependency",
+    "expected_zone": 3
+  },
+  {
+    "id": "p3",
+    "description": "System Design Request",
+    "prompt": "[ARCH] Design a fault-tolerant message queue system using Redis",
+    "expected_zone": 1
+  },
+  {
+    "id": "p4",
+    "description": "General Programming Concept",
+    "prompt": "What is the difference between map and flatMap in JavaScript?",
+    "expected_zone": 2
+  },
+  {
+    "id": "p5",
+    "description": "Source Code Modifications",
+    "prompt": "Write a fast search utility in src/utils/search.ts using binary search",
+    "expected_zone": 0
+  }
+]
