@@ -144,10 +144,19 @@ This project is built upon the following works and local setup references:
 
 <a href="https://www.star-history.com/?repos=Rezhnn%2FToken-Optimization&type=timeline&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Rezhnn/Token-Optimization&type=timeline&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Rezhnn/Token-Optimization&type=timeline&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Rezhnn/Token-Optimization&type=timeline&legend=top-left" />
- </picture>
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="https://api.star-history.com/svg?repos=Rezhnn/Token-Optimization&type=Date&theme=dark"
+  />
+  <source
+    media="(prefers-color-scheme: light)"
+    srcset="https://api.star-history.com/svg?repos=Rezhnn/Token-Optimization&type=Date"
+  />
+  <img
+    alt="Star History Chart"
+    src="https://api.star-history.com/svg?repos=Rezhnn/Token-Optimization&type=Date"
+  />
+</picture>
 </a>
 
 ### Live Stats
